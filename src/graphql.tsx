@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { DocumentNode } from 'graphql';
 import { parser, DocumentType } from './parser';
-import { OperationOption, DataProps, MutateProps } from './types';
+import { OperationOption, DataProps, MutateProps, ChildProps } from './types';
 
 import { query } from './query-hoc';
 import { mutation } from './mutation-hoc';
@@ -11,8 +11,7 @@ export function graphql<
   TProps extends TGraphQLVariables | {} = {},
   TData = {},
   TGraphQLVariables = {},
-  TChildProps = Partial<DataProps<TData, TGraphQLVariables>> &
-    Partial<MutateProps<TData, TGraphQLVariables>>
+  TChildProps = ChildProps<TProps,TData, TGraphQLVariables>
 >(
   document: DocumentNode,
   operationOptions: OperationOption<TProps, TData, TGraphQLVariables, TChildProps> = {},
